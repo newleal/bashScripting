@@ -1,1 +1,3 @@
-echo "Se adiciono l aparpeta al PTAH"
+echo "Se adiciono la carpeta al PATH"
+
+export PATH=$PATH~:/ruta/de/carpeta/
