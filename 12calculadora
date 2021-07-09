@@ -2,10 +2,17 @@
 
 NUMERO='^-?[0-9]+([.][0-9]+)?$'
 
-while ! [[ $NUMERO =~ $1 ]];do
-	echo "Es numero $1"
-	shift
-done
+if [ "$#" < 3 ];then
+
+	while ! [[ $NUMERO =~ $1 ]];do
+		echo "Es numero $1"
+		shift
+	done
+
+elif [ "$#" > 3 ];then
+	echo "Se ingreso mas de dos numeros"
+	exit 1
+fi
 
 #validate_number='^-?[0-9]+([.][0-9]+)?$'
 #echo "Please Enter your number ";
