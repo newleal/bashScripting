@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Scrip que retorna
+# un SI si el primer parametro coincide con algun usuario conectado
+# un NO en caso contrario
+
+function ayuda(){
+cat<< DESCRIPCION_AYUDA
+$0 NOMBRE_USUARIO
+DESCRIPCION
+Devuelve:
+SI si NOMBRE_USUARIO coincide con algun usuario conectado p
+NO si  NOMBRE_USUARIO no coincide con ningun usuario conectado
+CODIGOS DE RETORNO
+	1 Si el numero deparametros es distinto de 1
+DESCRIPCION_AYUDA
+}
+
+# Si numero de parametros es distinfo de 1
+if [ "$#" -ne 1 ];then
+	echo "El numero de para metros debe ser igual a 1"
+	ayuda
+	exit 1
+fi
+
+ESTA_CONECTADO=`who | grep $1`
+
+if [ -z "$ESTA_CONECTADO" ];then
+	echo "NO"
+else
+	echo "SI"
+fi
