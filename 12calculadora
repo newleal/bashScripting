@@ -1,0 +1,15 @@
+#!/bin/bash
+
+NUMERO='^-?[0-9]+([.][0-9]+)?$'
+
+while ! [[ $NUMERO =~ $1 ]];do
+	echo "Es numero $1"
+	shift
+done
+
+#validate_number='^-?[0-9]+([.][0-9]+)?$'
+#echo "Please Enter your number ";
+#read number
+#if  [[ $number =~ $validate_number ]]; then
+#echo "number OK"
+#fi
