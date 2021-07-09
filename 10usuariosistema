@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Se crea la funcion de ayua al usuario
+
+function ayuda(){
+	cat<< AYUDA
+Descripcion:
+Debes ingresar un agrumento por teclado, el nombre del usuario
+conectado, el programa te dira:
+Si si el nombre del usuario ingresado es un usuario conectado
+NO en caso contrario
+AYUDA
+}
+
+USUARIO=`whoami`
+
+# Recibiendo argumetos
+if [ -z "$1" ];then
+	echo 
+	echo "No hay datos!"
+	ayuda
+	exit 1
+elif [ "$1" = "$USUARIO" ];then
+	echo "SI!"
+else
+	echo "NO"
+	echo "Argumento ingresado: $1"
+fi
+	
