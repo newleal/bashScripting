@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function multi(){
+MULTI=$( echo "scale=4; $1 * $2" | bc )
+
+echo $MULTI
+}
+
+RESULTADO=$( multi $1 $2 )
+
+echo $RESULTADO
