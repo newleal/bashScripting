@@ -26,6 +26,13 @@ SIESNUMERO='^[0-9]+([.][0-9]+)?$' #expresion de referencia para definir si coinc
 		ayuda
 	fi
 
+	if [ "$#" -gt 2 ];then   # Se valida si exixten mas de dos numeros
+		echo
+		echo "Se ingresaron mas de dos numeros"
+		ayuda
+		exit
+	fi
+
 	if ! [[ "$1" =~ $SIESNUMERO ]];then  # Si parametros no son numero muestra yuda
 		echo
 		echo "El primer parametro no es un numero: $1 $2"
@@ -42,48 +49,56 @@ SIESNUMERO='^[0-9]+([.][0-9]+)?$' #expresion de referencia para definir si coinc
 	fi
 
 	
-	echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
+	echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "  # Lectura de para guardar la opcion en pantalla
 	read OPCION
 	
-	while ! [[ $OPCION =~ $SIESNUMERO ]];do
+	while ! [[ $OPCION =~ $SIESNUMERO ]];do        # Si la opcion no es un numero vuel a mostrar el menu de opciones
 		echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
 		read OPCION
-		2> /dev/null     
+		2> /dev/null                          # Para no mostrar el error por pantalla
 	done
 
-	while [ $OPCION -gt 4 ];do
+	while [ $OPCION -gt 4 ];do                   # Si el numero ingresado no es el indicado en el menu de opciones 
 		echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
-       		 read OPCION 
-done
+       		 read OPCION
+		2> /dev/null 
+	done
 
-while [ $OPCION -le 0 ];do
+while [ $OPCION -le 0 ];do                           # Si el numero ingresado no es el indicado
                 echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
                  read OPCION 
 		 
 done
 
-case $OPCION in
+case $OPCION in    				     # Realiza la opcion indicada con el case
 	1)
 		#suma
 		echo
-
-		RESULTADO=`source 12suma "$1" "$2"`
+		echo "La sume de los numeros es:"
+		RESULTADO=`source 12suma "$1" "$2"`  # Busca el ejecutable y trae el resultado
 		echo "$1 + $2 = $RESULTADO"
 
 		;;
 	2)
 		#resta
 		echo
+		echo "La resta de los numeros es:"
 		RESULTADO=`source 12resta "$1" "$2"`
 		echo "$1 - $2 = $RESULTADO"
 		;;
 	3)
 		#multi
-		echo "Multi"
+		echo
+		echo "La multiplicaion de los numeros es:"
+                RESULTADO=`source 12multi "$1" "$2"`
+                echo "$1 X $2 = $RESULTADO"
 		;;
 	4)
 		#div
-		echo "Divi"
+		echo
+		echo "La division de los numeros es:"
+                RESULTADO=`source 12div "$1" "$2"`
+                echo "$1 / $2 = $RESULTADO"
 		;;
 	*)
 		echo;;
