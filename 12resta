@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function resta(){
+RESTA=$(("scale=2; $1 - $2" | bc)) 
+
+echo $RESTA
+}
+
+RESULTADO=$(resta $1 $2)
+
+echo $RESULTADO
