@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function div(){
+DIV=$( echo "scale=4; $1 / $2" | bc )
+
+echo $DIV
+}
+
+RESULTADO=$( div $1 $2 )
+
+echo $RESULTADO  
