@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function suma(){
+SUMA=$(($1 + $2));
+echo $SUMA
+}
+
+RESULTADO=$( suma $1 $2 )
+echo $RESULTADO
