@@ -1,22 +1,92 @@
 #!/bin/bash
 
-NUMERO='^-?[0-9]+([.][0-9]+)?$'
+clear
+2>> /dev/null
 
-if [ "$#" < 3 ];then
+function ayuda(){
+	cat << AYUDA
 
-	while ! [[ $NUMERO =~ $1 ]];do
-		echo "Es numero $1"
-		shift
+Se debe ingresar dos numeros para realizar operaciones aritmeticas de:
+Suma(+)
+Resta(-) 
+Multipicaion(*)
+Division(/)
+y se mostrara el resultado
+$1 (operacion numero1 y numero2 ) $2 = resultado
+AYUDA
+}
+
+
+
+SIESNUMERO='^[0-9]+([.][0-9]+)?$' #expresion de referencia para definir si coincide con el parametro de entrada
+
+	if [ "$#" -le 0 ];then  # Validar si no se envio ningun parametro muestra ayuda
+		echo
+		echo "No se ingreso ningun valor"
+		ayuda
+	fi
+
+	if ! [[ "$1" =~ $SIESNUMERO ]];then  # Si parametros no son numero muestra yuda
+		echo
+		echo "El primer parametro no es un numero: $1 $2"
+		ayuda
+		exit 1
+	elif ! [[ "$2" =~ $SIESNUMERO ]];then
+		echo
+		echo "El segundo parametro no es un numero: $1  $2"
+		ayuda
+		exit 2
+	else
+		echo "Perfecto ingresaste numeros $1 y $2 !!"
+		echo
+	fi
+
+	
+	echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
+	read OPCION
+	
+	while ! [[ $OPCION =~ $SIESNUMERO ]];do
+		echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
+		read OPCION
+		2> /dev/null     
 	done
 
-elif [ "$#" > 3 ];then
-	echo "Se ingreso mas de dos numeros"
-	exit 1
-fi
+	while [ $OPCION -gt 4 ];do
+		echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
+       		 read OPCION 
+done
 
-#validate_number='^-?[0-9]+([.][0-9]+)?$'
-#echo "Please Enter your number ";
-#read number
-#if  [[ $number =~ $validate_number ]]; then
-#echo "number OK"
-#fi
+while [ $OPCION -le 0 ];do
+                echo "Digita: 1 - para suma, 2 - para resta, 3 - para multiplicacion, 4 - para division: "
+                 read OPCION 
+		 
+done
+
+case $OPCION in
+	1)
+		#suma
+		echo
+
+		RESULTADO=`source 12suma "$1" "$2"`
+		echo "$1 + $2 = $RESULTADO"
+
+		;;
+	2)
+		#resta
+		echo
+		RESULTADO=`source 12resta "$1" "$2"`
+		echo "$1 - $2 = $RESULTADO"
+		;;
+	3)
+		#multi
+		echo "Multi"
+		;;
+	4)
+		#div
+		echo "Divi"
+		;;
+	*)
+		echo;;
+esac
+
+
