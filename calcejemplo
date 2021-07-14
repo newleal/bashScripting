@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#Funcion de ayuda
+
+function ayuda () {
+cat << AYUDA
+Ayuda al usuario
+AYUDA
+}
+
+function comprobarQueNoEsNumero() {
+
+if [ -n "$1"\
+	-a "$1" != "0"\
+	-a "`echo $1 | awk '{ print $1*1 }'`" != "$1" ];then
+	
+	echo "El parametro '$1' no es un numero"
+	ayuda
+	exit 2
+fi
+}
+
+# Si numero de parametros es distinto de 3
+if [ "$#" -ne 3 ];then
+	echo "El numero de parametros debe igual a 3"
+	ayuda
+	exit 1
+fi
+
+comprobarQueNoEsNumero $1
+comprobarQueNoEsNumero $3
+
+case $2 in
+	+ | sum | mas) echo $1 $3 | awk '{ print $1 + $2 }' ;;
+	-|rer|menos) ./resta $1 $3;;
+	x|mul|por) ./multiplica $1 $3;;
+	/|div|entre) ./division $1 $3;;
+	*) echo "La operacion '$2' es invalida."; ayuda exit 3;;
+esac  
