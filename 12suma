@@ -1,7 +1,11 @@
 #!/bin/bash
 
 function suma(){
+<<<<<<< HEAD
 	SUMA=$(echo "scale=4; $1+$2" | bc -l);
+=======
+SUMA=$(echo "scale=4;$1 + $2"| bc);
+>>>>>>> 188f7bf8e795805a902b324a0d13566007f434da
 echo $SUMA
 }
 
