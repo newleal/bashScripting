@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function suma(){
-SUMA=$(($1 + $2));
+	SUMA=$(echo "scale=4; $1+$2" | bc -l);
 echo $SUMA
 }
 
