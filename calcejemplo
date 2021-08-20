@@ -32,8 +32,8 @@ comprobarQueNoEsNumero $3
 
 case $2 in
 	+ | sum | mas) echo $1 $3 | awk '{ print $1 + $2 }' ;;
-	-|rer|menos) ./resta $1 $3;;
-	x|mul|por) ./multiplica $1 $3;;
-	/|div|entre) ./division $1 $3;;
+	-|rer|menos) ./clacresta $1 $3;;
+	x|mul|por) ./clacmulti $1 $3;;
+	/|div|entre) ./clacdivi $1 $3;;
 	*) echo "La operacion '$2' es invalida."; ayuda exit 3;;
 esac  

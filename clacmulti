@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# funcion de ayuda
+function ayuda(){
+cat << AYUDA
+ayuda
+AYUDA
+}
+
+# Funcion para determianr que no es un numero
+
+function noesNumero(){
+if [ -n "$1" -a\
+	"$1" != "0" -a\
+	"`echo $1 | awk '{ print $1*1 }'`" != "$1" ];then
+	
+	echo "El parametro ingresado no es un numero: $1"
+	ayuda
+	exit 1
+fi 
+}
+
+#funcion para determinar si son dos numeros
+	if [ "$#" -ne 2 ];then
+		echo "La cantdad de argumentos dede ser 2"
+		ayuda
+		exit 1
+	fi
+
+
+noesNumero "$1"
+noesNumero "$2"
+
+echo $1 $2 | awk '{ print $1*$2 }'
